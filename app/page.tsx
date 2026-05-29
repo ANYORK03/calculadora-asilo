@@ -250,7 +250,7 @@ function CalculadoraAAF() {
       </p>
 
       <div>
-        <Label>¿Cuándo presentaste tu I-589?</Label>
+        <Label>¿Cuándo presentaste tu solicitud de asilo (I-589)?</Label>
         <DateInput value={fecha} onChange={setFecha} />
       </div>
 
@@ -420,7 +420,7 @@ function CalculadoraPermiso() {
       </p>
 
       <div>
-        <Label>Fecha del recibo de tu I-589</Label>
+        <Label>Fecha del recibo de tu solicitud de asilo (I-589)</Label>
         <DateInput value={fecha} onChange={setFecha} />
       </div>
 
@@ -540,7 +540,7 @@ function CalculadoraERequest() {
       </p>
 
       <div>
-        <Label>¿Cuándo enviaste tu I-765?</Label>
+        <Label>¿Cuándo enviaste tu solicitud de permiso de trabajo (I-765)?</Label>
         <DateInput value={fecha} onChange={setFecha} />
       </div>
 
@@ -594,8 +594,8 @@ function SeccionPreparadora() {
             Recibe orientación personalizada para tu caso migratorio.
           </p>
 
-          {/* Credenciales */}
-          <div className="mt-2.5 flex flex-wrap gap-x-4 gap-y-0.5">
+          {/* Servicios */}
+          <div className="mt-2 flex flex-wrap gap-x-4 gap-y-0.5">
             {["Asilo", "Permiso de Trabajo", "Real ID", "Cambios de Corte"].map(
               (item) => (
                 <span key={item} className="text-xs flex items-center gap-1">
@@ -604,6 +604,20 @@ function SeccionPreparadora() {
                 </span>
               )
             )}
+          </div>
+
+          {/* Confianza */}
+          <div className="mt-2.5 pt-2.5 border-t border-white border-opacity-10 flex flex-wrap gap-x-4 gap-y-0.5">
+            {[
+              "Atención en español",
+              "Orientación personalizada",
+              "Respuesta en menos de 24 horas",
+            ].map((item) => (
+              <span key={item} className="text-xs flex items-center gap-1">
+                <span className="text-[#fbbf24]">✓</span>
+                <span className="text-blue-200">{item}</span>
+              </span>
+            ))}
           </div>
         </div>
       </div>
@@ -616,7 +630,7 @@ function SeccionPreparadora() {
 const TABS: { id: Tab; label: string; emoji: string }[] = [
   { id: "aaf", label: "Tarifa de Asilo (AAF)", emoji: "💰" },
   { id: "permiso", label: "Permiso de Trabajo (I-765)", emoji: "💼" },
-  { id: "erequest", label: "Consultar Estado", emoji: "📨" },
+  { id: "erequest", label: "Seguimiento de Caso", emoji: "📨" },
 ];
 
 const WHATSAPP_NUMBER = "13123075331";
@@ -630,19 +644,17 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-[#1e3a5f] to-[#2d5282]">
       {/* Hero */}
-      <section className="text-white px-4 pt-10 pb-6 text-center">
+      <section className="text-white px-4 pt-12 pb-6 text-center">
         <div className="max-w-2xl mx-auto">
-          <div className="inline-block bg-white bg-opacity-15 text-white text-xs font-semibold px-3 py-1 rounded-full mb-4 uppercase tracking-wide">
-            Herramienta gratuita
-          </div>
           <h1 className="text-3xl sm:text-4xl font-extrabold leading-tight mb-3">
             Calculadora de Fechas
             <br />
             <span className="text-[#d4a843]">para tu Caso de Asilo</span>
           </h1>
-          <p className="text-blue-100 text-base sm:text-lg max-w-lg mx-auto">
-            Calcula tu tarifa AAF, cuándo puedes pedir tu permiso de trabajo y
-            si calificas para un E-Request — en segundos, sin guardar tus datos.
+          <p className="text-blue-100 text-base sm:text-lg max-w-lg mx-auto leading-relaxed">
+            Descubre los próximos pasos de tu caso de asilo en segundos. Calcula
+            si podrías pagar la tarifa anual de asilo, cuándo solicitar tu
+            permiso de trabajo y cuándo dar seguimiento a tu caso.
           </p>
           {/* ¿Qué quieres calcular? */}
           <div className="mt-5 bg-[#1a3558] rounded-2xl px-4 py-4 text-left max-w-lg mx-auto border border-[#b8962e] border-opacity-30">
