@@ -240,10 +240,13 @@ function CalculadoraAAF() {
 
   return (
     <div className="space-y-4">
-      <SectionTitle>Calculadora de Tarifa AAF</SectionTitle>
+      <SectionTitle>Tarifa de Asilo (AAF)</SectionTitle>
+      <p className="text-xs text-[#b8962e] font-medium mb-1">
+        Te ayuda a identificar si podrías estar sujeto al pago anual de la tarifa de asilo.
+      </p>
       <p className="text-sm text-gray-600">
-        La tarifa AAF ($102) aplica a ciertos solicitantes de asilo. Ingresa tu
-        información para ver tu situación.
+        La tarifa anual de asilo (AAF) es un pago de $102 que aplica a ciertos
+        solicitantes. Ingresa tu información para ver tu situación.
       </p>
 
       <div>
@@ -406,11 +409,14 @@ function CalculadoraPermiso() {
 
   return (
     <div className="space-y-4">
-      <SectionTitle>Calculadora de Permiso de Trabajo (EAD)</SectionTitle>
+      <SectionTitle>Permiso de Trabajo (I-765)</SectionTitle>
+      <p className="text-xs text-[#b8962e] font-medium mb-1">
+        Calcula cuándo podrías presentar tu solicitud de permiso de trabajo basada en asilo.
+      </p>
       <p className="text-sm text-gray-600">
-        Después de presentar el I-589, tienes que esperar{" "}
-        <strong>150 días</strong> para solicitar y{" "}
-        <strong>180 días</strong> para recibir tu permiso de trabajo.
+        Después de presentar el formulario I-589 (solicitud de asilo), debes esperar{" "}
+        <strong>150 días</strong> para solicitar tu permiso y{" "}
+        <strong>180 días</strong> para recibirlo.
       </p>
 
       <div>
@@ -522,11 +528,15 @@ function CalculadoraERequest() {
 
   return (
     <div className="space-y-4">
-      <SectionTitle>Calculadora E-Request (I-765)</SectionTitle>
+      <SectionTitle>Consultar Estado del Caso (E-Request)</SectionTitle>
+      <p className="text-xs text-[#b8962e] font-medium mb-1">
+        Te ayuda a saber si ya podrías hacer seguimiento a tu trámite mediante un E-Request.
+      </p>
       <p className="text-sm text-gray-600">
-        Si enviaste tu I-765 y no has recibido respuesta, el E-Request te
-        permite consultar el estado. A los <strong>60 días</strong> puedes
-        solicitarlo; a los <strong>90 días</strong> se considera urgente.
+        Si enviaste el formulario I-765 (permiso de trabajo) y no has recibido
+        respuesta, puedes enviar un E-Request para preguntar el estado. A los{" "}
+        <strong>60 días</strong> puedes solicitarlo; a los{" "}
+        <strong>90 días</strong> se considera una demora importante.
       </p>
 
       <div>
@@ -559,29 +569,42 @@ function CalculadoraERequest() {
 
 function SeccionPreparadora() {
   return (
-    <div className="max-w-2xl mx-auto mt-6">
-      <div className="bg-white bg-opacity-10 backdrop-blur-sm rounded-2xl px-5 py-5 flex items-center gap-4 border border-white border-opacity-20">
+    <div className="max-w-2xl mx-auto mt-5 px-4">
+      <div className="bg-[#1a3558] rounded-2xl px-4 py-4 flex items-start gap-4 border border-[#b8962e] border-opacity-40">
+        {/* Foto */}
         <div className="flex-shrink-0">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/images/raimaris-martinez.jpg"
             alt="Raimaris Martínez"
-            width={72}
-            height={72}
-            className="rounded-full object-cover object-top border-2 border-[#b8962e] w-[72px] h-[72px]"
+            className="rounded-full object-cover object-top border-2 border-[#b8962e] w-16 h-16 sm:w-[72px] sm:h-[72px]"
           />
         </div>
+
+        {/* Info */}
         <div className="flex-1 min-w-0">
-          <p className="text-white font-bold text-base leading-tight">
+          <p className="text-white font-bold text-sm sm:text-base leading-tight">
             Raimaris Martínez
           </p>
-          <p className="text-[#d4a843] text-xs font-medium mt-0.5">
+          <p className="text-[#fbbf24] text-xs font-semibold mt-0.5">
             Preparadora de Documentos Migratorios
           </p>
-          <p className="text-blue-100 text-sm mt-2 leading-snug">
-            ¿Tienes dudas sobre tu resultado? Raimaris puede orientarte paso a
-            paso.
+          <p className="text-white text-xs sm:text-sm mt-1.5 leading-snug opacity-90">
+            ¿Tienes dudas sobre tu resultado?{" "}
+            Recibe orientación personalizada para tu caso migratorio.
           </p>
+
+          {/* Credenciales */}
+          <div className="mt-2.5 flex flex-wrap gap-x-4 gap-y-0.5">
+            {["Asilo", "Permiso de Trabajo", "Real ID", "Cambios de Corte"].map(
+              (item) => (
+                <span key={item} className="text-xs flex items-center gap-1">
+                  <span className="text-[#fbbf24] font-bold">✓</span>
+                  <span className="text-white opacity-90">{item}</span>
+                </span>
+              )
+            )}
+          </div>
         </div>
       </div>
     </div>
@@ -591,9 +614,9 @@ function SeccionPreparadora() {
 // ─── Main Page ────────────────────────────────────────────────────────────────
 
 const TABS: { id: Tab; label: string; emoji: string }[] = [
-  { id: "aaf", label: "Tarifa AAF", emoji: "💰" },
-  { id: "permiso", label: "Permiso de Trabajo", emoji: "📋" },
-  { id: "erequest", label: "E-Request", emoji: "📬" },
+  { id: "aaf", label: "Tarifa de Asilo (AAF)", emoji: "💰" },
+  { id: "permiso", label: "Permiso de Trabajo (I-765)", emoji: "💼" },
+  { id: "erequest", label: "Consultar Estado", emoji: "📨" },
 ];
 
 const WHATSAPP_NUMBER = "13123075331";
@@ -621,22 +644,56 @@ export default function Home() {
             Calcula tu tarifa AAF, cuándo puedes pedir tu permiso de trabajo y
             si calificas para un E-Request — en segundos, sin guardar tus datos.
           </p>
-          <div className="flex flex-wrap justify-center gap-x-4 gap-y-1 mt-3">
-            <p className="text-blue-200 text-xs">
-              🔒 No guardamos ningún dato
+          {/* ¿Qué quieres calcular? */}
+          <div className="mt-5 bg-[#1a3558] rounded-2xl px-4 py-4 text-left max-w-lg mx-auto border border-[#b8962e] border-opacity-30">
+            <p className="text-white font-semibold text-sm text-center mb-3">
+              ¿Qué quieres calcular hoy?
             </p>
-            <p className="text-blue-200 text-xs">
-              📅 Última actualización legal: mayo 2026
-            </p>
-            <p className="text-blue-200 text-xs">
-              📌 Basado en información pública de USCIS y EOIR
-            </p>
+            <div className="space-y-2.5">
+              {[
+                { emoji: "💰", text: "Saber si debo pagar la tarifa de asilo (AAF)" },
+                { emoji: "💼", text: "Saber cuándo puedo solicitar mi permiso de trabajo" },
+                { emoji: "📨", text: "Saber si ya puedo hacer seguimiento a mi trámite" },
+              ].map((item) => (
+                <div key={item.text} className="flex items-center gap-3">
+                  <span className="text-lg">{item.emoji}</span>
+                  <span className="text-white text-sm opacity-90">{item.text}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Trust badges */}
+          <div className="flex flex-wrap justify-center gap-x-5 gap-y-1 mt-4">
+            <p className="text-blue-200 text-xs">🔒 No guardamos ningún dato</p>
+            <p className="text-blue-200 text-xs">📅 Actualización: mayo 2026</p>
+            <p className="text-blue-200 text-xs">📌 Fuente: USCIS y EOIR</p>
           </div>
         </div>
       </section>
 
       {/* Card principal */}
       <section className="px-4 pb-4">
+        {/* ¿Cómo funciona? */}
+        <div className="max-w-2xl mx-auto mb-3 bg-[#1a3558] rounded-xl px-4 py-3 border border-[#b8962e] border-opacity-30">
+          <p className="text-white text-xs font-semibold mb-2">¿Cómo funciona?</p>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            {[
+              { n: "1", t: "Selecciona lo que deseas calcular" },
+              { n: "2", t: "Ingresa tu fecha del formulario" },
+              { n: "3", t: "Obtén una orientación inmediata" },
+              { n: "4", t: "Si tienes dudas, consulta con Raimaris" },
+            ].map((s) => (
+              <div key={s.n} className="flex items-start gap-2">
+                <span className="flex-shrink-0 w-5 h-5 rounded-full bg-[#b8962e] text-white text-xs font-bold flex items-center justify-center">
+                  {s.n}
+                </span>
+                <span className="text-blue-100 text-xs leading-tight">{s.t}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
         <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
           {/* Tabs */}
           <div className="flex border-b border-gray-200">
@@ -689,12 +746,17 @@ export default function Home() {
       <SeccionPreparadora />
 
       {/* CTA WhatsApp */}
-      <div className="max-w-2xl mx-auto mt-5 px-4 text-center pb-10">
+      <div className="max-w-2xl mx-auto mt-8 px-4 text-center pb-12">
+        {/* Pre-CTA */}
+        <p className="text-white font-semibold text-base mb-4">
+          ¿Necesitas ayuda con tu caso?
+        </p>
+
         <a
           href={`https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MSG}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-bold px-6 py-3 rounded-full shadow-lg transition-all text-sm"
+          className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-bold px-7 py-3.5 rounded-full shadow-lg transition-all text-sm"
         >
           <svg
             className="w-5 h-5 flex-shrink-0"
@@ -707,11 +769,15 @@ export default function Home() {
           </svg>
           Consultar con Raimaris por WhatsApp
         </a>
-        <p className="text-blue-200 text-xs mt-3">
-          Respuesta típica en menos de 24 horas
-        </p>
 
-        <p className="text-blue-300 text-xs mt-6">
+        {/* Trust signals */}
+        <div className="flex flex-wrap justify-center gap-x-5 gap-y-1 mt-4">
+          <p className="text-blue-200 text-xs">🇪🇸 Atención en español</p>
+          <p className="text-blue-200 text-xs">⏱ Respuesta en menos de 24 horas</p>
+        </div>
+
+        {/* Footer legal */}
+        <p className="text-blue-400 text-xs mt-10 leading-relaxed">
           Esta herramienta es proporcionada sin garantías. No somos abogados.
           Para asesoría legal, contacta a un profesional acreditado.
         </p>
