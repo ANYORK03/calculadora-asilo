@@ -780,7 +780,19 @@ export default function Home() {
           href={`https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MSG}`}
           target="_blank"
           rel="noopener noreferrer"
-          onClick={() => gaEvent("whatsapp_click", { source: "calculadora_asilo" })}
+          onClick={() => {
+            const device =
+              typeof window !== "undefined" &&
+              /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)
+                ? "mobile"
+                : "desktop";
+            gaEvent("lead_whatsapp", {
+              source: "calculadora_asilo",
+              tab: activeTab,
+              device,
+              date: new Date().toISOString().split("T")[0],
+            });
+          }}
           className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-bold px-7 py-3.5 rounded-full shadow-lg transition-all text-sm"
         >
           <svg
