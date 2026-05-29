@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { event as gaEvent } from "@/lib/gtag";
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
@@ -638,8 +639,19 @@ const WHATSAPP_MSG = encodeURIComponent(
   "Hola Raimaris, usé la calculadora de asilo y tengo una pregunta sobre mi caso."
 );
 
+const TAB_EVENTS: Record<Tab, string> = {
+  aaf: "aaf_tab_selected",
+  permiso: "work_permit_tab_selected",
+  erequest: "case_followup_tab_selected",
+};
+
 export default function Home() {
   const [activeTab, setActiveTab] = useState<Tab>("aaf");
+
+  function handleTabChange(tab: Tab) {
+    setActiveTab(tab);
+    gaEvent(TAB_EVENTS[tab]);
+  }
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-[#1e3a5f] to-[#2d5282]">
@@ -712,7 +724,7 @@ export default function Home() {
             {TABS.map((tab) => (
               <button
                 key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
+                onClick={() => handleTabChange(tab.id)}
                 className={`flex-1 py-3 px-2 text-xs sm:text-sm font-semibold transition-all flex flex-col items-center gap-0.5 sm:flex-row sm:justify-center sm:gap-1.5 ${
                   activeTab === tab.id
                     ? "bg-[#1e3a5f] text-white border-b-2 border-[#b8962e]"
@@ -768,6 +780,7 @@ export default function Home() {
           href={`https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MSG}`}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() => gaEvent("whatsapp_click", { source: "calculadora_asilo" })}
           className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-bold px-7 py-3.5 rounded-full shadow-lg transition-all text-sm"
         >
           <svg
